@@ -1,0 +1,112 @@
+# =============== UNITY CORE ===============
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+
+# Ignore cache folders
+[Bb]urst/
+[Bb]uildCache/
+[Bb]ee/
+[Bb]ackupThisFolderButDontShipItWithYourGame/
+[Cc]ache/
+
+
+# =============== UNITY META FILES ===============
+# Asset .meta files should be committed because they store GUID references.
+!/[Aa]ssets/**/*.meta
+
+
+# =============== UNITY GENERATED / TEMP FILES ===============
+
+sysinfo.txt
+*.stackdump
+
+# Unity Addressables build cache
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+/[Aa]ssets/[Ss]treamingAssets/aa.meta
+/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+
+# =============== SCRIPTING & IDE FILES ===============
+
+# Visual Studio
+.vs/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.tmp
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+*.DotSettings.user
+/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# VS Code
+.vscode/
+.history/
+
+
+# =============== ART / TEXTURE SOURCE FILES (TUỲ BẠN) ===============
+# Nếu bạn KHÔNG muốn upload file gốc Photoshop:
+# *.psd
+# *.tif
+
+
+# =============== EXPORT / BUILD OUTPUTS ===============
+
+*.apk
+*.aab
+*.unitypackage
+
+# WebGL builds
+/[Bb]uild/[Ww]eb[Gg][Ll]/
+
+# Crashlytics
+crashlytics-build.properties
+
+
+# =============== VERSION CONTROL ===============
+
+# Git
+*.orig
+*.diff
+*.patch
+
+
+# =============== OS FILES ===============
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# =============== PACKAGE MANAGER ===============
+/[Pp]ackages/packages-lock.json
+# (manifest.json should remain)
+
+
+# =============== OTHER OPTIONAL ===============
+ExportedObj/
+.consulo/
+
+# Auto-save scene backups (tuỳ bạn)
+# *.autosave
