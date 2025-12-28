@@ -4,9 +4,9 @@ public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;
 
-    public int gridSizeX = 10;
-    public int gridSizeY = 10;
-    public float cellSize = 1f;
+    public int gridSizeX = 50;
+    public int gridSizeY = 50;
+    public float cellSize = 3f;
     public LayerMask obstacleMask;
 
     public Node[,] grid;
@@ -14,12 +14,10 @@ public class GridManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        CreateGrid();
+
     }
 
-    private void Start()
-    {
-        CreateGrid();
-    }
 
     public void CreateGrid()
     {

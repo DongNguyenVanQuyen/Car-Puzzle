@@ -555,6 +555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 207712125501040670}
   - component: {fileID: 4726313190499776542}
+  - component: {fileID: 2555651791874474462}
   m_Layer: 10
   m_Name: CompactCar_Red
   m_TagString: Untagged
@@ -572,7 +573,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 1, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 207712125501040668}
@@ -603,3 +604,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 1.55, z: 4.3}
   m_Center: {x: 0, y: 0.73, z: 0.17}
+--- !u!114 &2555651791874474462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207712125500552254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79cf38fd02470ea4ea7da82a6b51ffa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parkingManager: {fileID: 0}
+  parkingSlot: {fileID: 0}
+  moveSpeed: 3
+  rotateSpeed: 5
