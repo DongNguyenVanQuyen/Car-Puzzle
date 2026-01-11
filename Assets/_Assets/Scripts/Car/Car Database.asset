@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea51a75ca365904db552dedb16e279c, type: 3}
+  m_Name: Car Database
+  m_EditorClassIdentifier: 
+  cars:
+  - prefab: {fileID: 207712125500552254, guid: b114b8d24c8487d4face2d4d67fdbb66, type: 3}
+    color: {r: 1, g: 0, b: 0, a: 0}
+  - prefab: {fileID: 2684368423731851025, guid: 24075fd542ead56449bccfc9219b69ec, type: 3}
+    color: {r: 0, g: 0.6956537, b: 1, a: 0}
+  - prefab: {fileID: 5933389281880712221, guid: 5bcf42d65da7f114ab0a01d1eefd99ee, type: 3}
+    color: {r: 0.21238029, g: 1, b: 0, a: 0}
+  - prefab: {fileID: 6001071003197931631, guid: 77529227da8c9914b82949870fef5f73, type: 3}
+    color: {r: 0.98054266, g: 1, b: 0, a: 0}
