@@ -12,6 +12,13 @@ public class GridSpawner : MonoBehaviour
     public GameObject[] carPrefabs;
     public Transform carParent;
 
+    [Header("Grid Cell Prefab")]
+    private Vector3[,] cellDir;
+    public GameObject cellFramePrefab;   
+    public Transform frameParent;       
+    private float cellFrameY = 0.5f;
+    private float carFrameY = 0.9f;
+
     private BoxCollider area;
     private Vector3[,] cellPos;
     private GameObject[,] spawnedCars;
@@ -22,23 +29,21 @@ public class GridSpawner : MonoBehaviour
         GenerateLevel();
     }
 
-    // ========================
     // GENERATE LEVEL
-    // ========================
     public void GenerateLevel()
     {
         ClearOldLevel();
 
         cellPos = new Vector3[cellsX, cellsZ];
         spawnedCars = new GameObject[cellsX, cellsZ];
+        cellDir = new Vector3[cellsX, cellsZ];
 
-        BuildGrid();
-        SpawnGrid_NoFacingConflict();
+        BuildGrid();                      // 1. có vị trí
+        SpawnGrid_NoFacingConflict();     // 2. spawn xe + hướng
+        BuildFrames();                    // 3. build khung theo hướng xe
     }
 
-    // ========================
     // Build vị trí cell
-    // ========================
     void BuildGrid()
     {
         Vector3 size = area.size;
@@ -54,13 +59,37 @@ public class GridSpawner : MonoBehaviour
             + new Vector3(cellSizeX / 2, 0, cellSizeZ / 2);
 
         for (int x = 0; x < cellsX; x++)
+        {
             for (int z = 0; z < cellsZ; z++)
-                cellPos[x, z] = origin + new Vector3(x * cellSizeX, 0, z * cellSizeZ);
+            {
+                cellPos[x, z] = origin + new Vector3(x * cellSizeX, carFrameY, z * cellSizeZ);
+            }
+        }
     }
 
-    // ========================
+    void BuildFrames()
+    {
+        Vector3 size = area.size;
+        Vector3 worldSize = Vector3.Scale(size, transform.lossyScale);
+
+        float cellSizeX = worldSize.x / cellsX;
+        float cellSizeZ = worldSize.z / cellsZ;
+
+        for (int x = 0; x < cellsX; x++)
+        {
+            for (int z = 0; z < cellsZ; z++)
+            {
+                SpawnCellFrame(
+                    new Vector3(cellPos[x, z].x, cellFrameY, cellPos[x, z].z),
+                    cellSizeX,
+                    cellSizeZ,
+                    cellDir[x, z]
+                );
+            }
+        }
+    }
+
     // Spawn full grid nhưng không bao giờ có xe đối đầu nhau
-    // ========================
     void SpawnGrid_NoFacingConflict()
     {
         for (int x = 0; x < cellsX; x++)
@@ -68,14 +97,13 @@ public class GridSpawner : MonoBehaviour
             for (int z = 0; z < cellsZ; z++)
             {
                 Vector3 dir = PickValidDirection(x, z);
+                cellDir[x, z] = dir; // LƯU HƯỚNG TƯƠNG ỨNG CHO Ô
                 spawnedCars[x, z] = CreateCar(x, z, dir, false);
             }
         }
     }
 
-    // ========================
     // Lấy hướng hợp lệ cho 1 cell
-    // ========================
     Vector3 PickValidDirection(int cx, int cz)
     {
         List<Vector3> dirs = new List<Vector3>()
@@ -98,9 +126,7 @@ public class GridSpawner : MonoBehaviour
         return Vector3.right;
     }
 
-    // ========================
     // Kiểm tra xung đột (Facing Conflict)
-    // ========================
     bool Conflict(int cx, int cz, Vector3 newDir)
     {
         // Hàng (Z cố định)
@@ -134,9 +160,7 @@ public class GridSpawner : MonoBehaviour
         return false;
     }
 
-    // ========================
     // Spawn car
-    // ========================
     GameObject CreateCar(int x, int z, Vector3 lookDir, bool isTarget)
     {
         GameObject prefab = carPrefabs[Random.Range(0, carPrefabs.Length)];
@@ -151,9 +175,7 @@ public class GridSpawner : MonoBehaviour
         return car;
     }
 
-    // ========================
     // Clear Level cũ
-    // ========================
     void ClearOldLevel()
     {
         if (carParent == null) carParent = this.transform;
@@ -165,9 +187,8 @@ public class GridSpawner : MonoBehaviour
         }
     }
 
-    // ========================
-    // Shuffle list
-    // ========================
+
+    // Dùng để xáo trộn danh sách
     void Shuffle(List<Vector3> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -177,9 +198,25 @@ public class GridSpawner : MonoBehaviour
         }
     }
 
-    // ========================
+
+    // Dùng để spawn khung ô
+    void SpawnCellFrame(Vector3 position, float sizeX, float sizeZ, Vector3 dir)
+    {
+        if (cellFramePrefab == null) return;
+
+        Quaternion rot = Quaternion.LookRotation(dir == Vector3.zero ? Vector3.forward : dir);
+
+        GameObject frame = Instantiate(
+            cellFramePrefab,
+            position,
+            rot,
+            frameParent == null ? this.transform : frameParent
+        );
+
+        frame.transform.localScale = new Vector3(sizeX, 1, sizeZ);
+    }
+
     // Vẽ Grid
-    // ========================
     void OnDrawGizmos()
     {
         area = GetComponent<BoxCollider>();

@@ -11,7 +11,9 @@ public class CarInput : MonoBehaviour
 
     void OnMouseDown()
     {
-        carController.TryMoveByPlayer();
+        carController.isActivated = true;   // CHỈ XE NÀY HOẠT ĐỘNG
+        carController.TryMoveByPlayer();    // CHỈ XE NÀY CHẠY
     }
+
 
 }

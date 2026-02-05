@@ -4,4 +4,4 @@ using UnityEngine;
 public class CarData : ScriptableObject
 {
     public CarType[] cars;
-}
+    }

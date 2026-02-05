@@ -7,9 +7,13 @@ public class LaneBlockChecker : MonoBehaviour
     public Transform boundPoint;
 
     bool isBlocked = false;
+    public bool ignoreCheck = false;
+
 
     public bool IsLaneClear()
     {
+        if (ignoreCheck) return true;   // Không check nữa
+
         Vector3 dir = GetForwardDirection();
 
         isBlocked = Physics.Raycast(boundPoint.position, dir, checkDistance, carLayer);
@@ -19,6 +23,8 @@ public class LaneBlockChecker : MonoBehaviour
 
     public bool IsLaneClearDuringMove()
     {
+        if (ignoreCheck) return true;   // Không check nữa
+
         Vector3 dir = GetForwardDirection();
 
         isBlocked = Physics.Raycast(boundPoint.position, dir, 1f, carLayer);
